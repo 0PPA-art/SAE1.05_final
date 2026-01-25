@@ -9,10 +9,10 @@ def scan_gros_fichiers(racine: Path, max_count: int = 100, min_size_mb: float = 
 
     print(f"Scan récursif de : {racine}")
     print("veuillez patienter :")
-#partie assez bizzare, mais qui est necessaire car manque de solution 
+#partie assez bizzare avec un peut de d'IA, mais qui est necessaire car manque de solution
     for item in racine.rglob("*"): # parcours récursif de tous les fichiers et dossiers contenus dans racine et ses #sous-dossiers rglob = version “récursive” de glob de globale
-        if item.is_file(): #on vas supprimer sur notre analyse les dossiers et regarder uniquement a linterieur
-            try: # voir le site www.w3schools.com. , mais il vas teste un bloc de code et voir si il y a une erreur
+        if item.is_file(): #on vas supprimer sur notre analyse les dossiers et regarder uniquement a l interieur
+            try: # voir le site www.w3schools.com. Mais il vas teste un bloc de code et voir si il y a une erreur
                 size = item.stat().st_size #size vas récup les donnees du fichier
                 if size >= min_size:
                     fichiers.append((str(item), size))
@@ -25,18 +25,14 @@ def scan_gros_fichiers(racine: Path, max_count: int = 100, min_size_mb: float = 
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python scripte2.py <chemin_du_dossier>")
-        sys.exit(1)
-
     dossier = Path(sys.argv[1]).resolve()
+
     if not dossier.is_dir():
-        print(f"Erreur : {dossier} n'est pas un dossier valide")
         sys.exit(1)
 
     top_fichiers = scan_gros_fichiers(dossier)
 
-    # Préparation pour JSON : on double les backslashes sous Windows
+    # Préparation pour json : on double les backslashes sous Windows
     data = [[chemin.replace("\\", "\\\\"), taille] for chemin, taille in top_fichiers]
 
     with open("gros_fichiers.json", "w", encoding="utf-8") as f:
