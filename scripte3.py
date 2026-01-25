@@ -78,7 +78,7 @@ class Application(QApplication):
             self.fenetre.add_onglet(titre, widget_leg)
             self.pages_legendes.append(leg)
 
-        # Onglet Suppression / Bouton
+        # Bouton de suppression
         repertoire_base = str(Path.cwd().resolve())  # dossier scanné
 
         def callback_generation():
@@ -117,18 +117,13 @@ class Application(QApplication):
         fichier_ps1 = "supprimer_fichiers.ps1"
         with open(fichier_ps1, "w", encoding="utf-8") as f:
             f.write("# Script généré automatiquement - SAE 1.05\n\n")
-            f.write('$confirm = Read-Host "Confirmer la suppression ? (OUI)"\n')
             f.write('if ($confirm -eq "OUI") {\n')
-            f.write('    Write-Host "Suppression en cours..."\n')
             f.write('    Remove-Item -Path `\n')
             for chemin in selectionnes:
                 # Échappe les backslashes pour PowerShell
                 chemin_esc = chemin.replace("\\", "\\\\").replace('"', '\\"')
                 f.write(f'        "{chemin_esc}", `\n')
             f.write('        -Force -ErrorAction SilentlyContinue\n')
-            f.write('    Write-Host "Opération terminée."\n')
-            f.write('} else {\n')
-            f.write('    Write-Host "Opération annulée."\n')
             f.write('}\n')
 
         QMessageBox.information(self.fenetre, "Succès",
