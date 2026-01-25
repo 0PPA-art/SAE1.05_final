@@ -3,7 +3,7 @@ import json
 from pathlib import Path #juste mieux que os.path
 from typing import List, Tuple
 
-def scan_fichiers(racine: Path, max_count: int = 100, min_size_mb: float = 10.0) -> List[Tuple[str, int]]:
+def scan(racine: Path, max_count: int = 100, min_size_mb: float = 10.0) -> List[Tuple[str, int]]:
     min_size = int(min_size_mb * 1024 * 1024) # conversion de notre taille de fichier de Mo en octets
     fichiers: List[Tuple[str, int]] = [] #besoin d'une liste pour stocker la taille du fichier
 
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     if not dossier.is_dir():
         sys.exit(1)
 
-    fichiers1 = scan_fichiers(dossier)
+    fichiers1 = scan(dossier)
 
     # Préparation pour json : on double les backslashes sous Windows
     data = [[chemin.replace("\\", "\\\\"), taille] for chemin, taille in =fichiers1]
