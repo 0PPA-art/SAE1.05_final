@@ -26,7 +26,7 @@ def scan_gros_fichiers(racine: Path, max_count: int = 100, min_size_mb: float = 
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python analyse_fichiers.py <chemin_du_dossier>")
+        print("Usage: python scripte2.py <chemin_du_dossier>")
         sys.exit(1)
 
     dossier = Path(sys.argv[1]).resolve()

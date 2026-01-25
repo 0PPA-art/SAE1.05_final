@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QFileDialog
 import sys
 
-appli = QApplication(sys.argv) #application pour obtenir 
+appli = QApplication(sys.argv) #Démarre l'application graphique Qt et donne-lui les arguments de la ligne de commande
 dossier = QFileDialog.getExistingDirectory(
     None,
     "Choisir le dossier à analyser",
