@@ -1,11 +1,11 @@
 # forcer le dossier en dossier courant
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path #scripteDir prend le chemin
 Set-Location -Path $scriptDir -ErrorAction Stop
 
 # cherche la commande py
 $pythonCommands = @("py") 
 $python = $null
-#merci internet de m expliquer, Elle essaie de trouver la première commande Python qui existe vraiment sur #l’ordinateur de l’utilisateur, parmi une liste de noms possibles.
+#recherche la première commande Python qui existe sur #l’ordinateur, parmi une liste.
 foreach ($cmd in $pythonCommands) {
     if (Get-Command $cmd -ErrorAction SilentlyContinue) {
         $python = $cmd
@@ -19,10 +19,8 @@ if (-not $python) {
     exit 1
 }
 
-#Write-Host "Python détecté : $python"
-
 # partie Choix du dossier
-#On commence à le choisir ici avec dossierRaw ,et 2>$null est une redirection d'erreur rappel des cours d'Hensel
+#On commence à le choisir ici avec dossierRaw ,et 2>$null est une redirection d'erreur
 $dossierraw = & $python ".\scripte_1.py" 2>$null # ces juste pour avoir le scripte python stocker dans la variable
 $dossier = $dossierraw.Trim() # Trim() sert  à supprimer les espace inutile si jamais
 
@@ -32,7 +30,7 @@ if (-not $dossier -or $dossier -eq "") {
     pause
     exit
 }
-# previent si le dossier est impossible à ouvrir merci mes cours de BTS
+# previent si le dossier est impossible à ouvrir
 if (-not (Test-Path $dossier -PathType Container)) {
     Write-Host "pas possible ce dossier → $dossier"
     pause
@@ -40,9 +38,6 @@ if (-not (Test-Path $dossier -PathType Container)) {
 }
 #on previent qu'il y a un dossier
 Write-Host "Dossier : $dossier"
-
-# Lancement analyse (avec chemin)
-Write-Host "Lancement"
 
 # Chemin absolu du script d'analyse
 $analyseScript = Join-Path -Path $scriptDir -ChildPath "scripte2.py"
