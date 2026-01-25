@@ -1,4 +1,3 @@
-# choisir_dossier.py
 from PyQt5.QtWidgets import QApplication, QFileDialog
 import sys
 
