@@ -35,18 +35,16 @@ Write-Host "Exécution : $python `"$analyseScript`" `"$dossier`""
 
 & $python $analyseScript $dossier
 
-# partie interface
+
 #crée un fichier json pour obtenir un aperçus du scripte analyse
 $jsonPath = Join-Path -Path $scriptDir -ChildPath "gros_fichiers.json"
 
 if (Test-Path $jsonPath -PathType Leaf) {
     Write-Host "gros_fichiers.json cree"
-    
+    # partie interface
     $interfaceScript = Join-Path -Path $scriptDir -ChildPath "scripte3.py"
     & $python $interfaceScript
 } else {
     Write-Host "gros_fichiers.json impossible cree"
 }
-
-Write-Host ""
 pause
