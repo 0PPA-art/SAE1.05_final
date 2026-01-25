@@ -26,14 +26,14 @@ def scan(racine: Path, max_count: int = 100, min_size_mb: float = 10.0) -> List[
 
 if __name__ == "__main__":
     dossier = Path(sys.argv[1]).resolve()
-
     if not dossier.is_dir():
+        print(f"Erreur : {dossier} n'est pas un dossier valide")
         sys.exit(1)
 
-    fichiers1 = scan(dossier)
+    top_fichiers = scan(dossier)
 
-    # Préparation pour json : on double les backslashes sous Windows
-    data = [[chemin.replace("\\", "\\\\"), taille] for chemin, taille in =fichiers1]
+    # Préparation pour JSON : on double les backslashes sous Windows
+    data = [[chemin.replace("\\", "\\\\"), taille] for chemin, taille in top_fichiers]
 
     with open("gros_fichiers.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
