@@ -1,10 +1,6 @@
-# ./lance_analyse.ps1
-
-# === FORCER le dossier du script comme dossier courant ===
+# forcer le dossier en dossier courant
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location -Path $scriptDir -ErrorAction Stop
-
-Write-Host "(U:\Bureau\SAE1.05) : $(Get-Location)"
 
 # cherche la commande py
 $pythonCommands = @("py") 
@@ -49,7 +45,8 @@ Write-Host "Dossier : $dossier"
 Write-Host "Lancement"
 
 # Chemin absolu du script d'analyse
-$analyseScript = Join-Path -Path $scriptDir -ChildPath "scripte2.py" #$futurechemin = cmdassemblerdechemin #dossierdebase ciblescripte.ps1 insertunnomdefichier
+$analyseScript = Join-Path -Path $scriptDir -ChildPath "scripte2.py"
+#$futurechemin = cmdassemblerdechemin #dossierdebase ciblescripte.ps1 insertunnomdefichier
 
 Write-Host "Exécution : $python `"$analyseScript`" `"$dossier`""
 
