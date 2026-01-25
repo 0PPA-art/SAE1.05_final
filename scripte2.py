@@ -9,7 +9,8 @@ def scan(racine: Path, max_count: int = 100, min_size_mb: float = 10.0) -> List[
 
     print(f"Scan récursif de : {racine}")
     print("veuillez patienter :")
-#partie assez bizzare avec un peut de d'IA, mais qui est necessaire car manque de solution
+
+#partie avec un peut de d'IA, mais qui est necessaire car manque de solution
     for item in racine.rglob("*"): # parcours récursif de tous les fichiers et dossiers contenus dans racine et ses #sous-dossiers rglob = version “récursive” de glob de globale
         if item.is_file(): #on vas supprimer sur notre analyse les dossiers et regarder uniquement a l interieur
             try: # voir le site www.w3schools.com. Mais il vas teste un bloc de code et voir si il y a une erreur
@@ -32,7 +33,6 @@ if __name__ == "__main__":
 
     top_fichiers = scan(dossier)
 
-    # Préparation pour JSON : on double les backslashes sous Windows
     data = [[chemin.replace("\\", "\\\\"), taille] for chemin, taille in top_fichiers]
 
     with open("gros_fichiers.json", "w", encoding="utf-8") as f:

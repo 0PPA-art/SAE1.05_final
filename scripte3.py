@@ -6,9 +6,9 @@ from PyQt5.QtWidgets import QApplication, QMessageBox
 from PyQt5.QtGui import QColor
 
 # Import des 4 classes fournies
-from Creation_Onglets import Onglets	# utilisation du fichier .py de Eckler
-from Creation_Camembert import Camembert  # utilisation du fichier .py de Eckler
-from Creation_Legendes import Legendes	# utilisation du fichier .py de Eckler
+from Creation_Onglets import Onglets
+from Creation_Camembert import Camembert
+from Creation_Legendes import Legendes
 from Creation_Boutons import Boutons	
 
 # Constantes
