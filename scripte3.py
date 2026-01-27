@@ -5,7 +5,6 @@ from pathlib import Path
 from PyQt5.QtWidgets import QApplication, QMessageBox
 from PyQt5.QtGui import QColor
 
-# Import des 4 classes fournies (nécessaires pour l'interface)
 from Creation_Onglets import Onglets
 from Creation_Camembert import Camembert
 from Creation_Legendes import Legendes
