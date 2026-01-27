@@ -31,7 +31,6 @@ def generer_couleurs(nb: int) -> list[QColor]:
 
 # Fonction pour le fichier json
 def charger_donnees_json() -> list[list]:
-    """Charge [[chemin, taille], ...] depuis gros_fichiers.json"""
     try:
         with open(FICHIER_JSON, "r", encoding="utf-8") as f:
             data = json.load(f)
