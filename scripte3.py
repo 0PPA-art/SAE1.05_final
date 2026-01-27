@@ -66,27 +66,26 @@ def generer_script_suppression(fichiers, pages_legendes, fenetre):
 
     fichier_ps1 = "supprimer_fichiers.ps1"
     with open(fichier_ps1, "w", encoding="utf-8") as f:
-        f.write("# Script généré - SAE 1.05\n\n")
-        f.write('$confirmation = Read-Host "Etes-vous bien certain(e) ? (OUI)"\n')
-        f.write('if ($confirmation -eq "OUI") {\n')
-        f.write('    Remove-Item -Path @(\n')
+        f.write('Write-Output "Script PowerShell pour supprimer des fichiers sans confirmation"\n')
+        f.write('Write-Output "Attention : cette suppression est définitivement ..."\n')
+        f.write('$reponse = Read-Host "Veuillez confirmer la suppression de tous ces fichiers : (OUI)"\n')
+        f.write('if ($reponse -eq "OUI") {\n')
+        f.write('    $confirmation = Read-Host "Etes-vous bien certain(e) ? (OUI)"\n')
+        f.write('    if ($confirmation -eq "OUI") {\n')
 
-        for i, chemin in enumerate(selectionnes):
-            # Échappe uniquement les guillemets pour PowerShell
+        for chemin in selectionnes:
             chemin_esc = chemin.replace('"', '`"')
-            if i < len(selectionnes) - 1:
-                f.write(f'        "{chemin_esc}",\n')
-            else:
-                f.write(f'        "{chemin_esc}"\n')
+            f.write(f'        Remove-Item -Path "{chemin_esc}" -Force\n')
 
-        f.write('    ) -Force -ErrorAction SilentlyContinue\n')
-        f.write('    Write-Output "Suppression terminee."\n')
+        f.write('    } else {\n')
+        f.write('        Write-Output "Operation annulee..."\n')
+        f.write('    }\n')
         f.write('} else {\n')
         f.write('    Write-Output "Operation annulee..."\n')
         f.write('}\n')
 
-    QMessageBox.information(fenetre, "Succès",
-                            f"Script créé : {fichier_ps1}\n\nExécutez-le avec PowerShell.")
+    QMessageBox.information(fenetre, "Succes",
+                            f"Script créé : {fichier_ps1}\n\nExecutez-le avec PowerShell.")
 
 
 def construire_interface(fichiers, couleurs, fenetre):
