@@ -67,7 +67,7 @@ def generer_script_suppression(fichiers, pages_legendes, fenetre):
 
     fichier_ps1 = "supprimer_fichiers.ps1"
     with open(fichier_ps1, "w", encoding="utf-8") as f:
-        f.write("# Script généré automatiquement - SAE 1.05\n\n")
+        f.write("# Script généré- SAE 1.05\n\n")
         f.write('if ($confirm -eq "OUI") {\n')
         f.write('    Remove-Item -Path `\n')
         for chemin in selectionnes:
